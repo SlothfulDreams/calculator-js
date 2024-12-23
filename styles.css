@@ -1,0 +1,71 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f3f4f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.calculator {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.display {
+    background-color: #222831;
+    color: #ffffff;
+    font-size: 2rem;
+    padding: 20px;
+    text-align: right;
+    border-bottom: 1px solid #dddddd;
+    flex-shrink: 0;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 20px;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #e0e0e0;
+    border: none;
+    border-radius: 8px;
+    padding: 15px;
+    font-size: 1.2rem;
+    flex: 1 1 calc(25% - 10px);
+    /* Allows for wrapping and spacing */
+    text-align: center;
+    cursor: pointer;
+}
+
+button.operator {
+    background-color: #ff5722;
+    color: #ffffff;
+}
+
+button.equals {
+    background-color: #4caf50;
+    color: #ffffff;
+    flex: 1 1 100%;
+    /* Make "=" button span the full width */
+}
+
+button.clear {
+    background-color: #f44336;
+    color: #ffffff;
+}
+
+button:hover {
+    opacity: 0.9;
+}
