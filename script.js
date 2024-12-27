@@ -12,23 +12,23 @@ const addNumOperation = () => {
   });
 };
 
-const add = () => {
-  // adds the numbers
+const add = (num1, nums2) => {
+  return Number(num1) + Number(num2);
 };
 
-const substract = () => {
-  // substracts
+const subtract = (num1, nums2) => {
+  return Number(num1) - Number(num2);
 };
 
-const division = () => {
-  // Division
+const multiply = (num1, nums2) => {
+  return Number(num1) * Number(num2);
 };
 
-const multiply = () => {
-  // multiply
+const divide = (num1, nums2) => {
+  return Number(num1) / Number(num2);
 };
 
-const operate = () => {
+const operate = (num1, num2) => {
   // Takes two numbers then calls one of the above functions
 };
 addNumOperation();
