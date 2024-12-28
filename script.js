@@ -27,7 +27,7 @@ const divide = (num1, nums2) => {
   return Number(num1) / Number(num2);
 };
 
-const operate = (num1, num2) => {
+const operate = (num1, num2, operation) => {
   // Takes two numbers then calls one of the above functions
 };
 
