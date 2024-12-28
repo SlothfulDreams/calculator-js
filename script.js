@@ -4,10 +4,9 @@ let numberStack = [];
 const addNumOperation = () => {
   document.addEventListener("click", (e) => {
     if (e.target.matches("button")) {
-      if (numberStack.length < 0) {
-        display.textContent = e.target.textContent;
-        numberStack.push(e.target.textContent);
-      }
+      display.textContent = e.target.textContent;
+      numberStack.push(e.target.textContent);
+      console.log(numberStack);
     }
   });
 };
@@ -31,4 +30,9 @@ const divide = (num1, nums2) => {
 const operate = (num1, num2) => {
   // Takes two numbers then calls one of the above functions
 };
+
+const clear = () => {
+  numberStack.length = 0;
+};
+
 addNumOperation();
