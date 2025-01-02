@@ -17,6 +17,10 @@ const addNumOperation = () => {
       num = "";
       display.textContent = 0;
     }
+
+    if (e.target.className == "equals") {
+      // Calculate everything
+    }
   });
 };
 
