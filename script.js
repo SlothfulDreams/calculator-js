@@ -1,12 +1,29 @@
 const display = document.querySelector(".display");
 let num = "";
-const numberStack = [];
+const numberStack = [0];
 const operations = ["/", "-", "+", "*"];
+
+// Operations
+const add = (num1, nums2) => {
+  return num1 + num2;
+};
+
+const subtract = (num1, nums2) => {
+  return num1 - num2;
+};
+
+const multiply = (num1, nums2) => {
+  return num1 * num2;
+};
+
+const divide = (num1, nums2) => {
+  return num1 / num2;
+};
 
 const addNumOperation = () => {
   document.addEventListener("click", (e) => {
     if (e.target.className == "digit") {
-      if (numberStack.length < 13) {
+      if (numberStack.at(-1).length < 13) {
         if (num.length == 0) {
           num += e.target.textContent;
           display.textContent = num;
@@ -17,7 +34,7 @@ const addNumOperation = () => {
           const inputNumber = e.target.textContent;
           display.textContent = lastDigit + inputNumber;
           numberStack.push(lastDigit + inputNumber);
-          console.log(numberStack);
+          console.log(numberStack, "bruh");
         }
       }
     }
@@ -44,26 +61,6 @@ const addNumOperation = () => {
       // Calculate everything
     }
   });
-};
-
-const add = (num1, nums2) => {
-  return num1 + num2;
-};
-
-const subtract = (num1, nums2) => {
-  return num1 - num2;
-};
-
-const multiply = (num1, nums2) => {
-  return num1 * num2;
-};
-
-const divide = (num1, nums2) => {
-  return num1 / num2;
-};
-
-const operate = (num1, num2, operation) => {
-  // Takes two s then calls one of the above functions
 };
 
 addNumOperation();
