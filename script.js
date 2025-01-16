@@ -1,74 +1,9 @@
 const display = document.querySelector(".display");
-let num = "";
-const numberStack = ["0"];
-const operations = ["/", "-", "+", "*"];
+let x = "";
+let operator = "";
+let y = "";
+let resetDisplay = true;
 
-const addNumOperation = () => {
-  document.addEventListener("click", (e) => {
-    if (e.target.className == "digit") {
-      if (numberStack.at(-1) === "0") {
-        display.textContent = e.target.textContent;
-        numberStack.pop();
-        num = display.textContent;
-      } else if (operations.includes(numberStack.at(-1))) {
-        num += e.target.textContent;
-        display.textContent = num;
-      } else {
-        display.textContent += e.target.textContent;
-        num = display.textContent;
-      }
-    }
-
-    if (e.target.className == "operator") {
-      if (numberStack.length == 2) {
-        numberStack.push(num);
-        num = "";
-        console.log(numberStack);
-      } else if (operations.includes(numberStack.at(-1))) {
-        display.textContent = NaN;
-        numberStack.length = 0;
-      } else {
-        numberStack.push(num);
-        numberStack.push(e.target.textContent);
-        console.log(numberStack, "pushing");
-        num = "";
-      }
-    }
-
-    if (e.target.className == "clear") {
-      num = "";
-      numberStack.length = 0;
-      display.textContent = 0;
-      numberStack.push("0");
-    }
-
-    if (e.target.className == "equals") {
-      switch (numberStack.at(-2)) {
-        case "/":
-          console.log(operate(numberStack.at(0), numberStack.at(-1), divide));
-          console.log("Divide");
-          break;
-
-        case "*":
-          console.log(operate(numberStack.at(0), numberStack.at(-1), multiply));
-          console.log("Mutiply");
-          break;
-
-        case "+":
-          console.log(operate(numberStack.at(0), numberStack.at(-1), add));
-          console.log("Add");
-          break;
-
-        case "-":
-          console.log(operate(numberStack.at(0), numberStack.at(-1), subtract));
-          console.log("Subtract");
-          break;
-      }
-    }
-  });
-};
-
-// Operations
 const add = (num1, num2) => {
   return num1 + num2;
 };
@@ -85,8 +20,69 @@ const divide = (num1, num2) => {
   return (num1 / num2).toString().slice(0, 13);
 };
 
-const operate = (num1, num2, operations) => {
-  return operations(num1, num2);
+const operate = (num1, num2, calc) => {
+  return calc(num1, num2);
 };
 
-addNumOperation();
+document.addEventListener("click", (e) => {
+  if (e.target.className == "digit") {
+    if (resetDisplay) {
+      display.textContent = e.target.textContent;
+      resetDisplay = false;
+      if (operator) {
+        y = display.textContent;
+      } else {
+        x = display.textContent;
+      }
+    } else {
+      display.textContent += e.target.textContent;
+      if (operator) {
+        y += e.target.textContent;
+      } else {
+        x += e.target.textContent;
+      }
+    }
+  } else if (e.target.className == "operator" && x && !y) {
+    operator = e.target.textContent;
+    resetDisplay = true;
+  } else if (x && operator && y && e.target.className == "equals") {
+    display.textContent = switchOperator(operator);
+    resetDisplay = true;
+    x = display.textContent;
+  } else if (e.target.className == "operator" && x && y) {
+    display.textContent = switchOperator(operator);
+    x = display.textContent;
+    operator = "";
+    y = "";
+    resetDisplay = true;
+  } else if (e.target.className == "operator" && x && y) {
+    display.textContent = switchOperator(operator);
+    x = display.textContent;
+    operator = e.target.textContent;
+    y = "";
+    resetDisplay = true;
+  }
+  if (e.target.className == "clear") {
+    x = "";
+    y = "";
+    operator = "";
+    resetDisplay = true;
+    display.textContent = 0;
+  }
+});
+
+function switchOperator(operator) {
+  const num1 = Number(x);
+  const num2 = Number(y);
+
+  switch (operator) {
+    case "/":
+      return operate(num1, num2, divide);
+    case "*":
+      return operate(num1, num2, multiply);
+    case "+":
+      return operate(num1, num2, add);
+    case "-":
+      return operate(num1, num2, subtract);
+  }
+}
