@@ -52,12 +52,6 @@ document.addEventListener("click", (e) => {
   } else if (e.target.className == "operator" && x && y) {
     display.textContent = switchOperator(operator);
     x = display.textContent;
-    operator = "";
-    y = "";
-    resetDisplay = true;
-  } else if (e.target.className == "operator" && x && y) {
-    display.textContent = switchOperator(operator);
-    x = display.textContent;
     operator = e.target.textContent;
     y = "";
     resetDisplay = true;
